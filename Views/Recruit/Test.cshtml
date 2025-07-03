@@ -1,0 +1,92 @@
+@model List<FitDevRecruit.Models.Question>
+
+@{
+    ViewData["Title"] = "FitDev 인적성 평가 - 문제 풀이";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-success text-white" style="background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);">
+                    <h6 class="mb-0">
+                        <i class="fas fa-question-circle me-2"></i>
+                        인적성 평가 문제 
+                        <span class="badge bg-light text-dark ms-2">
+                            @(ViewBag.ExperienceLevel == FitDevRecruit.Models.ExperienceLevel.Junior ? "신입" : "경력")
+                        </span>
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SubmitTest" method="post">
+                        <input type="hidden" name="candidateId" value="@ViewBag.CandidateId" />
+                        
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            var question = Model[i];
+                            <div class="question-card mb-4 p-4 border rounded">
+                                <h6 class="question-number mb-2">
+                                    <span class="badge bg-primary me-2">문제 @(i + 1)</span>
+                                    @question.Text
+                                </h6>
+                                
+                                @if (question.Type == FitDevRecruit.Models.QuestionType.MultipleChoice || 
+                                     question.Type == FitDevRecruit.Models.QuestionType.Personality)
+                                {
+                                    <div class="choices">
+                                        @for (int j = 0; j < question.Choices.Count; j++)
+                                        {
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" 
+                                                       name="answers[@question.Id]" value="@(j + 1)" 
+                                                       id="q@(question.Id)_@(j + 1)" required />
+                                                <label class="form-check-label" for="q@(question.Id)_@(j + 1)">
+                                                    @(j + 1). @question.Choices[j]
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else if (question.Type == FitDevRecruit.Models.QuestionType.Subjective)
+                                {
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="answers[@question.Id]" 
+                                                  rows="3" placeholder="답변을 입력하세요" required></textarea>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                답안 제출하기
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.question-card {
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.question-card:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.question-number {
+    color: #495057;
+}
+
+.choices {
+    margin-left: 1rem;
+}
+</style> 
