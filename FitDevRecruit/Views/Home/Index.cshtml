@@ -1,0 +1,248 @@
+﻿@{
+    ViewData["Title"] = "인적성 평가 시스템";
+}
+
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="hero-title display-6 mb-3">
+                    인적성 평가 시스템
+                </h1>
+                <p class="hero-subtitle lead">
+                    솔로몬텍의 인재 채용을 위한 종합적인 평가 시스템입니다.<br/>
+                    기술 지식, 인성, 문제 해결력을 객관적으로 평가합니다.
+                </p>
+                <div class="mt-4 mb-3">
+                    <a href="@Url.Action("Index", "Recruit")" class="btn btn-primary btn-lg px-5 py-3" style="font-size:1.2rem;">
+                        <i class="fas fa-play me-2"></i>
+                        평가 시작하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="row mb-4">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body">
+                            <div class="icon-wrapper mb-3 tech">
+                                <i class="fas fa-laptop-code fa-2x" style="color:#6c757d;"></i>
+                            </div>
+                            <h5 class="card-title mb-2">기술 평가</h5>
+                            <p class="card-text text-muted mb-0">
+                                프로그래밍 언어, 데이터베이스, 네트워크 등<br />
+                                실무에 필요한 기술 역량을 평가합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body">
+                            <div class="icon-wrapper mb-3 personality">
+                                <i class="fas fa-user-group fa-2x" style="color:#6c757d;"></i>
+                            </div>
+                            <h5 class="card-title mb-2">인성 평가</h5>
+                            <p class="card-text text-muted mb-0">
+                                협업, 책임감, 성장 마인드 등<br />
+                                조직 문화에 적합한 인성을 평가합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body">
+                            <div class="icon-wrapper mb-3 problem">
+                                <i class="far fa-lightbulb fa-2x" style="color:#6c757d;"></i>
+                            </div>
+                            <h5 class="card-title mb-2">문제 해결력</h5>
+                            <p class="card-text text-muted mb-0">
+                                논리적 사고, 창의적 해결 능력<br />
+                                복잡한 문제를 해결하는 능력을 평가합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-3 mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4 class="card-title mt-2 mb-3">평가 프로세스</h4>
+                            <div class="mb-2"></div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <div class="process-step">
+                                        <div class="step-number mb-3">1</div>
+                                        <h5 class="card-title mb-2">정보 입력</h5>
+                                        <p class="card-text text-muted mb-0">개인정보 및 지원팀 선택</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="process-step">
+                                        <div class="step-number mb-3">2</div>
+                                        <h5 class="card-title mb-2">평가 진행</h5>
+                                        <p class="card-text text-muted mb-0">다양한 유형의 문제 풀이</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="process-step">
+                                        <div class="step-number mb-3">3</div>
+                                        <h5 class="card-title mb-2">자동 채점</h5>
+                                        <p class="card-text text-muted mb-0">객관적인 성과 분석</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="process-step">
+                                        <div class="step-number mb-3">4</div>
+                                        <h5 class="card-title mb-2">결과 확인</h5>
+                                        <p class="card-text text-muted mb-0">상세한 평가 리포트</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.feature-card {
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1), box-shadow 0.3s;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.12), 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.icon-wrapper.tech {
+    background: #fff;
+    color: #2563eb;
+}
+.icon-wrapper.personality {
+    background: #fff;
+    color: #ff6f61;
+}
+.icon-wrapper.problem {
+    background: #fff;
+    color: #eab308;
+}
+.icon-wrapper.extra {
+    background: #2196d3;
+    color: #fff;
+}
+
+.feature-card:hover .icon-wrapper {
+    transform: scale(1.12);
+    box-shadow: 0 16px 48px rgba(44,62,80,0.28), 0 4px 24px rgba(0,0,0,0.16);
+    background: #fff;
+}
+
+.process-step {
+    text-align: center;
+}
+
+.process-step .step-number {
+    background: #0082c9;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 auto 1rem;
+}
+
+.process-step h5.card-title {
+    color: #000000;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+}
+
+.process-step p.card-text.text-muted {
+    color: #6c757d;
+    font-size: 0.97rem;
+    margin-bottom: 0;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+    padding: 5rem 0 1.5rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.container.mt-5 {
+    margin-top: 1.5rem !important;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.row.mb-5 {
+    margin-bottom: 1.2rem !important;
+}
+
+.row.mt-3 {
+    margin-top: 0.5rem !important;
+}
+
+/* 문제해결력 SVG 아이콘 스타일 */
+.icon-wrapper.problem svg {
+    width: 38px;
+    height: 38px;
+    display: block;
+}
+
+.icon-wrapper.personality i.fa-heart {
+    color: #ff6f61;
+    background: linear-gradient(135deg, #ffb3a7 0%, #ff6f61 80%);
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(255, 111, 97, 0.18), 0 1.5px 8px rgba(255, 111, 97, 0.10);
+    padding: 12px;
+    font-size: 2.2rem;
+}
+
+.icon-wrapper.tech i,
+.icon-wrapper.personality i,
+.icon-wrapper.problem i {
+    color: inherit;
+    text-shadow: none;
+}
+</style>
