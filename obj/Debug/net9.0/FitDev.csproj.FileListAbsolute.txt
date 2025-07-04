@@ -1,0 +1,4 @@
+C:\Users\USER\Work\FitDev\obj\Debug\net9.0\FitDev.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Work\FitDev\obj\Debug\net9.0\FitDev.AssemblyInfoInputs.cache
+C:\Users\USER\Work\FitDev\obj\Debug\net9.0\FitDev.AssemblyInfo.cs
+C:\Users\USER\Work\FitDev\obj\Debug\net9.0\FitDev.csproj.CoreCompileInputs.cache
