@@ -13,16 +13,19 @@ namespace FitDevRecruit.Services
             _questionService = questionService;
         }
 
-        // 시험 진행: 문제 출제, 답안 입력, 채점
-        public void ConductTest(Candidate candidate, int questionCount = 5)
+        // 시험 진행: 맞춤형 문제 출제, 답안 입력, 채점
+        public void ConductTest(Candidate candidate, int questionCount = 10)
         {
-            var questions = _questionService.GetRandomQuestions(questionCount);
+            // 새로운 맞춤형 출제 메서드 사용
+            var questions = _questionService.GetCustomizedQuestions(candidate.Team, candidate.ExperienceLevel, questionCount);
             candidate.Answers = new Dictionary<int, string>();
-            int technical = 0, personality = 0, problemSolving = 0;
+            
+            // 카테고리별 점수 초기화
+            int technical = 0, personality = 0, problemSolving = 0, coding = 0, design = 0, leadership = 0;
 
             foreach (var q in questions)
             {
-                Console.WriteLine($"\n문제 {q.Id}: {q.Text}");
+                Console.WriteLine($"\n문제 {q.Id} ({q.Category}): {q.Text}");
                 if (q.Type == QuestionType.MultipleChoice || q.Type == QuestionType.Personality)
                 {
                     for (int i = 0; i < q.Choices.Count; i++)
@@ -32,25 +35,63 @@ namespace FitDevRecruit.Services
                 var answer = Console.ReadLine();
                 candidate.Answers[q.Id] = answer;
 
-                // 자동 채점
-                if (q.Type == QuestionType.MultipleChoice && int.TryParse(answer, out int idx))
+                // 카테고리별 자동 채점
+                var score = CalculateScore(q, answer);
+                
+                switch (q.Category)
                 {
-                    if (q.CorrectChoiceIndex == idx - 1) technical += 20; // 예시: 1문제 20점
-                }
-                else if (q.Type == QuestionType.Subjective)
-                {
-                    // 주관식은 간단히 정답 문자열 비교(실제론 평가 필요)
-                    if (!string.IsNullOrEmpty(q.Answer) && answer?.Trim() == q.Answer.Trim())
-                        problemSolving += 20;
-                }
-                else if (q.Type == QuestionType.Personality && int.TryParse(answer, out int pScore))
-                {
-                    personality += pScore; // 1~5점 등급 가정
+                    case QuestionCategory.Technical:
+                        technical += score;
+                        break;
+                    case QuestionCategory.Coding:
+                        coding += score;
+                        break;
+                    case QuestionCategory.Design:
+                        design += score;
+                        break;
+                    case QuestionCategory.Personality:
+                        personality += score;
+                        break;
+                    case QuestionCategory.Leadership:
+                        leadership += score;
+                        break;
+                    case QuestionCategory.ProblemSolving:
+                        problemSolving += score;
+                        break;
                 }
             }
-            candidate.TechnicalScore = technical;
-            candidate.PersonalityScore = personality;
+            
+            // 종합 점수 계산
+            candidate.TechnicalScore = technical + coding + design;
+            candidate.PersonalityScore = personality + leadership;
             candidate.ProblemSolvingScore = problemSolving;
+        }
+
+        private int CalculateScore(Question question, string? answer)
+        {
+            if (string.IsNullOrEmpty(answer)) return 0;
+
+            switch (question.Type)
+            {
+                case QuestionType.MultipleChoice:
+                    if (int.TryParse(answer, out int idx) && question.CorrectChoiceIndex == idx - 1)
+                        return 5; // 객관식 정답 시 5점
+                    return 0;
+                
+                case QuestionType.Subjective:
+                    // 주관식은 간단히 정답 문자열 비교 (실제론 더 정교한 평가 필요)
+                    if (!string.IsNullOrEmpty(question.Answer) && answer.Trim().ToLower() == question.Answer.Trim().ToLower())
+                        return 5; // 주관식 정답 시 5점
+                    return 2; // 부분 점수
+                
+                case QuestionType.Personality:
+                    if (int.TryParse(answer, out int pScore) && pScore >= 1 && pScore <= 5)
+                        return question.PersonalityScore ?? pScore; // 인성 점수 반영
+                    return 0;
+                
+                default:
+                    return 0;
+            }
         }
     }
 } 
