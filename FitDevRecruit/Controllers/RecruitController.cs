@@ -138,7 +138,11 @@ namespace FitDevRecruit.Controllers
             candidate.ProblemSolvingMaxScore = problemSolvingMax;
 
             var report = _reportService.GenerateReport(candidate);
-            return View("Result", report);
+            // 결과 파일에 저장
+            _reportService.SaveReportToFile(report);
+            // 전체 결과 리스트를 TempData에 저장 (리다이렉트용)
+            TempData["LastCandidateId"] = candidate.Id;
+            return RedirectToAction("Result");
         }
 
         private int CalculateScore(Question question, string? answer)
@@ -169,7 +173,12 @@ namespace FitDevRecruit.Controllers
         // 결과 페이지
         public IActionResult Result()
         {
-            return View();
+            // 전체 결과 불러오기
+            var allReports = _reportService.LoadAllReports();
+            // 최근 제출 지원자(본인) 강조
+            int lastId = TempData["LastCandidateId"] != null ? (int)TempData["LastCandidateId"] : -1;
+            ViewBag.LastCandidateId = lastId;
+            return View(allReports);
         }
     }
 } 

@@ -1,7 +1,9 @@
-@model FitDevRecruit.Models.Report
+@model List<FitDevRecruit.Models.Report>
 
 @{
     ViewData["Title"] = "인적성 평가 - 결과";
+    int lastId = ViewBag.LastCandidateId != null ? (int)ViewBag.LastCandidateId : -1;
+    var myReport = Model.LastOrDefault(r => r.CandidateId == lastId) ?? Model.LastOrDefault();
 }
 
 <div class="container mt-5">
@@ -29,27 +31,27 @@
                                         <div class="info-item mb-2">
                                             <span class="info-icon me-2"><i class="fas fa-user"></i></span>
                                             <span class="info-label fw-bold me-1">이름:</span>
-                                            <span class="info-value">@Model.CandidateName</span>
+                                            <span class="info-value">@myReport.CandidateName</span>
                                         </div>
                                         <div class="info-item mb-2">
                                             <span class="info-icon me-2"><i class="fas fa-envelope"></i></span>
                                             <span class="info-label fw-bold me-1">이메일:</span>
-                                            <span class="info-value">@Model.CandidateEmail</span>
+                                            <span class="info-value">@myReport.CandidateEmail</span>
                                         </div>
                                         <div class="info-item mb-2">
                                             <span class="info-icon me-2"><i class="fas fa-user-graduate"></i></span>
                                             <span class="info-label fw-bold me-1">신입/경력:</span>
-                                            <span class="info-value">@(Model.CandidateLevel == "Junior" ? "신입" : Model.CandidateLevel == "Senior" ? "경력" : Model.CandidateLevel)</span>
+                                            <span class="info-value">@(myReport.CandidateLevel == "Junior" ? "신입" : myReport.CandidateLevel == "Senior" ? "경력" : myReport.CandidateLevel)</span>
                                         </div>
                                         <div class="info-item mb-2">
                                             <span class="info-icon me-2"><i class="fas fa-users"></i></span>
                                             <span class="info-label fw-bold me-1">지원 팀:</span>
-                                            <span class="info-value">@(Model.CandidateTeam == "Backend" ? "백엔드" : Model.CandidateTeam == "Frontend" ? "프론트엔드" : Model.CandidateTeam == "Data" ? "데이터" : Model.CandidateTeam == "Infra" ? "인프라" : Model.CandidateTeam)</span>
+                                            <span class="info-value">@(myReport.CandidateTeam == "Backend" ? "백엔드" : myReport.CandidateTeam == "Frontend" ? "프론트엔드" : myReport.CandidateTeam == "Data" ? "데이터" : myReport.CandidateTeam == "Infra" ? "인프라" : myReport.CandidateTeam)</span>
                                         </div>
                                         <div class="info-item mb-2">
                                             <span class="info-icon me-2"><i class="fas fa-calendar-alt"></i></span>
                                             <span class="info-label fw-bold me-1">응시일:</span>
-                                            <span class="info-value">@Model.TestDate.ToString("yyyy-MM-dd HH:mm")</span>
+                                            <span class="info-value">@myReport.TestDate.ToString("yyyy-MM-dd HH:mm")</span>
                                         </div>
                                     </div>
                                 </div>
@@ -66,33 +68,33 @@
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <span class="score-label">기술 점수</span>
                                                 <span class="score-value text-brand">
-                                                    @Model.TechnicalScore / 100
+                                                    @myReport.TechnicalScore / 100
                                                 </span>
                                             </div>
                                             <div class="progress">
-                                                <div class="progress-bar bg-brand" style="width: @(Model.TechnicalScore)%"></div>
+                                                <div class="progress-bar bg-brand" style="width: @(myReport.TechnicalScore)%"></div>
                                             </div>
                                         </div>
                                         <div class="score-card mb-3">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <span class="score-label">인성 점수</span>
                                                 <span class="score-value text-brand">
-                                                    @Model.PersonalityScore / 100
+                                                    @myReport.PersonalityScore / 100
                                                 </span>
                                             </div>
                                             <div class="progress">
-                                                <div class="progress-bar bg-brand" style="width: @(Model.PersonalityScore)%"></div>
+                                                <div class="progress-bar bg-brand" style="width: @(myReport.PersonalityScore)%"></div>
                                             </div>
                                         </div>
                                         <div class="score-card mb-3">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <span class="score-label">문제해결력</span>
                                                 <span class="score-value text-brand">
-                                                    @Model.ProblemSolvingScore / 100
+                                                    @myReport.ProblemSolvingScore / 100
                                                 </span>
                                             </div>
                                             <div class="progress">
-                                                <div class="progress-bar bg-brand" style="width: @(Model.ProblemSolvingScore)%"></div>
+                                                <div class="progress-bar bg-brand" style="width: @(myReport.ProblemSolvingScore)%"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -108,12 +110,12 @@
                             <div>
                                 <strong>종합 평가</strong>
                                 <div class="score-summary-line" style="margin-top:0.2em; margin-bottom:0.5em;">
-                                    <span class="score-label">기술 점수:</span> <span class="score-value">@Model.TechnicalScore / 100</span>
-                                    <span class="score-label">인성 점수:</span> <span class="score-value">@Model.PersonalityScore / 100</span>
-                                    <span class="score-label">문제해결력 점수:</span> <span class="score-value">@Model.ProblemSolvingScore / 100</span>
+                                    <span class="score-label">기술 점수:</span> <span class="score-value">@myReport.TechnicalScore / 100</span>
+                                    <span class="score-label">인성 점수:</span> <span class="score-value">@myReport.PersonalityScore / 100</span>
+                                    <span class="score-label">문제해결력 점수:</span> <span class="score-value">@myReport.ProblemSolvingScore / 100</span>
                                 </div>
                                 <div class="score-summary-line" style="margin-bottom:0.5em;">
-                                    <span class="score-label">@Model.Summary.Split('\n').LastOrDefault()</span>
+                                    <span class="score-label">@myReport.Summary.Split('\n').LastOrDefault()</span>
                                 </div>
                             </div>
                         </div>
@@ -127,6 +129,55 @@
                             <i class="fas fa-print me-2"></i>
                             결과 출력하기
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card mb-4 shadow-sm" style="margin-top:1.5rem;">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">전체 지원자 결과 비교</h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle text-center mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>이름</th>
+                                    <th>이메일</th>
+                                    <th>팀</th>
+                                    <th>레벨</th>
+                                    <th>응시일</th>
+                                    <th>기술</th>
+                                    <th>인성</th>
+                                    <th>문제해결력</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var r in Model.OrderByDescending(x => x.TestDate))
+                                {
+                                    var highlight = r.CandidateId == lastId ? "table-primary fw-bold" : "";
+                                    <tr class="@highlight" style="vertical-align:middle;">
+                                        <td>
+                                            @if (r.CandidateId == lastId)
+                                            {
+                                                <i class="fas fa-star text-warning me-1"></i>
+                                            }
+                                            @r.CandidateName
+                                        </td>
+                                        <td class="text-truncate" style="max-width:160px;">@r.CandidateEmail</td>
+                                        <td>@(r.CandidateTeam == "Backend" ? "백엔드" : r.CandidateTeam == "Frontend" ? "프론트엔드" : r.CandidateTeam == "Data" ? "데이터" : r.CandidateTeam == "Infra" ? "인프라" : r.CandidateTeam)</td>
+                                        <td>@(r.CandidateLevel == "Junior" ? "신입" : r.CandidateLevel == "Senior" ? "경력" : r.CandidateLevel)</td>
+                                        <td>@r.TestDate.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td><span class="badge score-tech">@r.TechnicalScore</span></td>
+                                        <td><span class="badge score-person">@r.PersonalityScore</span></td>
+                                        <td><span class="badge score-prob">@r.ProblemSolvingScore</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -247,4 +298,11 @@
 .info-icon i {
     font-size: 0.95em;
 }
+
+.bg-brand { background-color: #007bff !important; color: #fff !important; }
+.table-primary.fw-bold { font-weight: bold; background-color: #e3f2fd !important; }
+.badge { font-size: 1em; padding: 0.5em 0.8em; }
+.score-tech { background-color: #e3f2fd !important; color: #1976d2 !important; }
+.score-person { background-color: #e2e3e5 !important; color: #495057 !important; }
+.score-prob { background-color: #c8e6c9 !important; color: #388e3c !important; }
 </style> 

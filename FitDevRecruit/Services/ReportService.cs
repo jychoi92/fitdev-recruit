@@ -1,10 +1,15 @@
 using System;
 using FitDevRecruit.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace FitDevRecruit.Services
 {
     public class ReportService
     {
+        private static readonly string ResultsFilePath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "results.json");
+
         public Report GenerateReport(Candidate candidate)
         {
             // 실제 출제된 문제 개수와 각 문항별 최대점수로 만점 계산
@@ -50,6 +55,29 @@ namespace FitDevRecruit.Services
             Console.WriteLine($"문제해결력 점수: {report.ProblemSolvingScore}");
             Console.WriteLine($"\n{report.Summary}");
             Console.WriteLine("========================\n");
+        }
+
+        // 평가 결과를 파일에 저장
+        public void SaveReportToFile(Report report)
+        {
+            List<Report> reports = new List<Report>();
+            if (File.Exists(ResultsFilePath))
+            {
+                var json = File.ReadAllText(ResultsFilePath);
+                if (!string.IsNullOrWhiteSpace(json))
+                    reports = JsonSerializer.Deserialize<List<Report>>(json) ?? new List<Report>();
+            }
+            reports.Add(report);
+            File.WriteAllText(ResultsFilePath, JsonSerializer.Serialize(reports, new JsonSerializerOptions { WriteIndented = true }));
+        }
+
+        // 전체 평가 결과 불러오기
+        public List<Report> LoadAllReports()
+        {
+            if (!File.Exists(ResultsFilePath)) return new List<Report>();
+            var json = File.ReadAllText(ResultsFilePath);
+            if (string.IsNullOrWhiteSpace(json)) return new List<Report>();
+            return JsonSerializer.Deserialize<List<Report>>(json) ?? new List<Report>();
         }
     }
 } 

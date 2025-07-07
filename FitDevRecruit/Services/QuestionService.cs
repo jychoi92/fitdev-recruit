@@ -132,7 +132,8 @@ namespace FitDevRecruit.Services
                            .ToList();
         }
 
-        // 새로운 맞춤형 출제 메서드
+        // [부정행위 방지] 모든 문제 출제는 OrderBy(_random.Next())로 무작위(랜덤)로 이루어집니다.
+        // 지원자별로 문제 순서와 내용이 달라 부정행위(공유, 외부 답변 등) 방지 효과가 있습니다.
         public List<Question> GetCustomizedQuestions(TeamType team, ExperienceLevel level, int totalCount = 10)
         {
             var key = (team, level);
