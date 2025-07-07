@@ -9,34 +9,32 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-user-plus me-2"></i>
-                        지원자 정보 입력
-                    </h5>
+                    <h5 class="mb-0 fw-bold">지원자 정보 입력</h5>
                 </div>
-                <div class="card-body" style="padding:1.5rem;">
-                    <div class="text-center mb-3">
-                        <p class="text-muted mb-3" style="font-size:0.97rem; color:#6c757d;">솔로몬텍의 인재 채용을 위한 종합 평가입니다.</p>
-                        <p class="text-muted mb-3" style="font-size:0.97rem; color:#6c757d;">솔로몬텍의 인재 채용을 위한 종합 평가입니다.</p>
+                <div class="card-body">
+                    <div class="text-center mb-4 mt-2">
+                        <div class="recruit-avatar mb-3" style="margin-left:auto; margin-right:auto;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="fw-bold" style="color:#222; font-size:1.13rem;">솔로몬텍 인재 채용을 위한 종합 평가입니다.</div>
+                        <div class="recruit-desc-2">아래 정보를 입력하신 후, 평가를 시작해 주세요.</div>
                     </div>
                     <form asp-action="StartTest" method="post">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label asp-for="Name" class="form-label">이름 *</label>
+                                <label asp-for="Name" class="form-label">이름 <span class="text-primary-blue">*</span></label>
                                 <input asp-for="Name" class="form-control" placeholder="이름을 입력하세요" required />
                                 <span asp-validation-for="Name" class="text-danger small"></span>
                             </div>
-                            
                             <div class="col-md-6 mb-3">
-                                <label asp-for="Email" class="form-label">이메일 *</label>
+                                <label asp-for="Email" class="form-label">이메일 <span class="text-primary-blue">*</span></label>
                                 <input asp-for="Email" type="email" class="form-control" placeholder="이메일을 입력하세요" required />
                                 <span asp-validation-for="Email" class="text-danger small"></span>
                             </div>
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label asp-for="ExperienceLevel" class="form-label">경력 구분 *</label>
+                                <label asp-for="ExperienceLevel" class="form-label">경력 구분 <span class="text-primary-blue">*</span></label>
                                 <select asp-for="ExperienceLevel" class="form-select" required>
                                     <option value="">경력을 선택하세요</option>
                                     <option value="@FitDevRecruit.Models.ExperienceLevel.Junior">신입</option>
@@ -44,9 +42,8 @@
                                 </select>
                                 <span asp-validation-for="ExperienceLevel" class="text-danger small"></span>
                             </div>
-                            
                             <div class="col-md-6 mb-3">
-                                <label for="Team" class="form-label">지원 팀 *</label>
+                                <label for="Team" class="form-label">지원 팀 <span class="text-primary-blue">*</span></label>
                                 <select class="form-select" id="Team" name="Team" required>
                                     <option value="">팀을 선택하세요</option>
                                     <option value="Backend">백엔드</option>
@@ -56,24 +53,22 @@
                                 </select>
                             </div>
                         </div>
-                        
-                        <div class="alert alert-info mt-4">
-                            <div class="d-flex align-items-start">
-                                <i class="fas fa-info-circle me-3 mt-1 text-primary"></i>
-                                <div>
-                                    <strong class="d-block mb-2">평가 안내</strong>
-                                    <ul class="mb-0 small">
-                                        <li>기술 지식, 인성, 문제 해결력을 종합적으로 평가합니다.</li>
-                                        <li>경력에 따라 다른 난이도의 문제가 출제됩니다.</li>
-                                        <li>총 5문제가 출제되며, 객관식과 주관식이 포함됩니다.</li>
-                                        <li>평가 시간은 약 10-15분 정도 소요됩니다.</li>
-                                    </ul>
-                                </div>
+                        <div class="recruit-info-box mb-4 mt-4">
+                            <div class="info-icon-wrap">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div>
+                                <strong>평가 안내</strong>
+                                <ul class="mb-0 small">
+                                    <li>기술 지식, 인성, 문제 해결력을 종합적으로 평가합니다.</li>
+                                    <li>경력에 따라 다른 난이도의 문제가 출제됩니다.</li>
+                                    <li>총 5문제가 출제되며, 객관식과 주관식이 포함됩니다.</li>
+                                    <li>평가 시간은 약 10-15분 정도 소요됩니다.</li>
+                                </ul>
                             </div>
                         </div>
-                        
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="recruit-btn-gradient">
                                 <i class="fas fa-play me-2"></i>
                                 평가 시작하기
                             </button>

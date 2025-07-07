@@ -117,6 +117,29 @@ body {
   transform: translateY(-2px);
 }
 
+.btn-print {
+  background: linear-gradient(90deg, #6c757d 0%, #adb5bd 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 18px !important;
+  font-weight: 700 !important;
+  font-size: 1.15rem !important;
+  box-shadow: 0 6px 32px 0 rgba(44, 62, 80, 0.13), 0 2px 12px 0 rgba(0,0,0,0.08);
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  padding: 1.1rem 2.5rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.7rem;
+}
+.btn-print:hover, .btn-print:focus {
+  background: linear-gradient(90deg, #495057 0%, #6c757d 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 12px 40px 0 rgba(44, 62, 80, 0.18), 0 4px 24px 0 rgba(0,0,0,0.13);
+  transform: translateY(-2px);
+}
+
 /* Cards */
 .card {
   border: 1px solid var(--border-color);
@@ -132,11 +155,16 @@ body {
 }
 
 .card-header {
-  background-color: var(--light-gray);
+  background-color: #f7f9fa;
   border-bottom: 1px solid var(--border-color);
-  border-radius: 12px 12px 0 0 !important;
-  font-weight: 600;
-  color: var(--primary-color);
+  border-radius: 20px 20px 0 0 !important;
+  font-weight: 700;
+  color: #222;
+  font-size: 1.18rem;
+  padding: 1.25rem 1.2rem 1.25rem 1.2rem;
+  text-align: left;
+  letter-spacing: -0.5px;
+  margin-bottom: 0;
 }
 
 .card-body {
@@ -316,8 +344,14 @@ body {
 }
 
 .badge-primary {
-  background-color: var(--primary-color);
-  color: var(--white);
+  background-color: #0082c9 !important;
+  color: #fff !important;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  display: inline-block;
 }
 
 .badge-secondary {
@@ -411,4 +445,220 @@ body {
 .step-blue {
   background: #0082c9 !important;
   color: #fff !important;
+}
+
+.recruit-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.10), 0 2px 12px 0 rgba(0,0,0,0.08);
+  padding: 0;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.recruit-card-body {
+  padding: 2.5rem 2.5rem 2.2rem 2.5rem;
+}
+
+.recruit-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.2rem;
+  margin-top: 2.2rem;
+}
+
+.recruit-avatar {
+  width: 44px;
+  height: 44px;
+  background: #0082c9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.recruit-avatar i {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.recruit-desc {
+  color: #444;
+  font-size: 1.05rem;
+  text-align: center;
+  margin-bottom: 0.2rem;
+}
+
+.recruit-desc-2 {
+  color: #222;
+  font-size: 1.05rem;
+  margin-bottom: 2.8rem;
+}
+
+.recruit-btn-gradient {
+  width: 100%;
+  background: linear-gradient(90deg, #0082c9 0%, #4ecdc4 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 18px !important;
+  font-weight: 700 !important;
+  font-size: 1.15rem !important;
+  box-shadow: 0 6px 32px 0 rgba(44, 62, 80, 0.13), 0 2px 12px 0 rgba(0,0,0,0.08);
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  padding: 1.1rem 2.5rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.7rem;
+}
+.recruit-btn-gradient:hover, .recruit-btn-gradient:focus {
+  background: linear-gradient(90deg, #0082c9 0%, #38b6b2 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 12px 40px 0 rgba(44, 62, 80, 0.18), 0 4px 24px 0 rgba(0,0,0,0.13);
+  transform: translateY(-2px);
+}
+
+.recruit-info-box {
+  display: flex;
+  align-items: flex-start;
+  background: linear-gradient(90deg, #e3f7fa 0%, #e6f9f6 100%);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem 1.2rem 1.2rem;
+  margin-top: 2.2rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 10px 0 rgba(44, 62, 80, 0.04);
+}
+.info-icon-wrap {
+  margin-right: 1.1rem;
+  margin-top: 0.1rem;
+}
+.info-icon-wrap i {
+  color: #19b6e6;
+  font-size: 1.2rem;
+}
+.recruit-info-box strong {
+  font-weight: 700;
+  color: #222;
+  display: block;
+  margin-bottom: 0;
+}
+.recruit-info-box ul {
+  margin-bottom: 0;
+  color: #333;
+  font-size: 0.98rem;
+  padding-left: 1.1rem;
+}
+
+.recruit-info-box .small {
+  font-size: 0.97rem;
+}
+
+.text-primary-blue {
+  color: #0082c9 !important;
+}
+
+.pill-badge {
+  background: #dee2e6 !important;
+  color: #222 !important;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  padding: 0.32em 1.1em 0.32em 1.1em;
+  display: inline-block;
+  letter-spacing: -0.5px;
+}
+
+.pill-badge.junior {
+  background: #e3f7fa;
+  color: #0082c9;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.pill-badge.senior {
+  background: #222;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.bg-brand {
+  background-color: #0082c9 !important;
+}
+.text-brand {
+  color: #0082c9 !important;
+}
+
+.result-desc {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+.result-desc-1 {
+  font-weight: bold;
+  color: #222;
+  font-size: 1.13rem;
+}
+.result-desc-2 {
+  color: #222;
+  font-size: 1.05rem;
+  margin-top: 0.2rem;
+  margin-bottom: 2.8rem;
+}
+
+.recruit-btn-gradient {
+  min-width: 280px;
+  max-width: 400px;
+  padding: 1rem 1.5rem !important;
+  white-space: nowrap;
+}
+
+.btn-print {
+  min-width: 180px;
+  max-width: 260px;
+  padding: 1rem 1.5rem !important;
+  white-space: nowrap;
+  width: 200px;
+}
+
+.recruit-btn-gradient.back-btn {
+  min-width: 180px;
+  max-width: 260px;
+  padding: 1rem 1.5rem !important;
+  white-space: nowrap;
+  width: 200px;
+  text-decoration: none;
+}
+
+.score-value {
+  font-weight: bold;
+  font-size: 1.35em;
+}
+
+.applicant-info-box {
+  background: #f7fafd;
+  border-radius: 10px;
+  padding: 1.1rem 1.5rem;
+  box-shadow: 0 2px 10px 0 rgba(44, 62, 80, 0.04);
+  margin-bottom: 0.5rem;
+}
+.info-item {
+  font-size: 1.07rem;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+.info-icon {
+  color: #b0b8c1;
+  font-size: 1.15rem;
+}
+@media (max-width: 768px) {
+  .applicant-info-box {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 1rem 1rem;
+  }
+  .info-item {
+    margin-right: 0 !important;
+    margin-bottom: 0.5rem;
+  }
 }

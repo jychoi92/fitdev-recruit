@@ -8,30 +8,24 @@
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">
-                            <i class="fas fa-question-circle me-2"></i>
-                            인적성 평가 문제
-                        </h5>
-                        <span class="badge badge-primary">
-                            @(ViewBag.ExperienceLevel == FitDevRecruit.Models.ExperienceLevel.Junior ? "신입" : "경력")
-                        </span>
-                    </div>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold">인적성 평가 문제</h5>
+                    <span class="pill-badge @(ViewBag.ExperienceLevel == FitDevRecruit.Models.ExperienceLevel.Junior ? "junior" : "senior")">
+                        @(ViewBag.ExperienceLevel == FitDevRecruit.Models.ExperienceLevel.Junior ? "신입" : "경력")
+                    </span>
                 </div>
                 <div class="card-body">
-                    <div class="alert alert-info mb-4">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-info-circle me-2 text-primary"></i>
-                            <div>
-                                <strong>평가 진행 안내:</strong> 모든 문제에 답변해주세요. 답안 제출 후에는 수정이 불가능합니다.
-                            </div>
+                    <div class="recruit-info-box mb-4 mt-0">
+                        <div class="info-icon-wrap">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div>
+                            <strong>평가 진행 안내</strong>
+                            <span class="small">모든 문제에 답변해주세요. 답안 제출 후에는 수정이 불가능합니다.</span>
                         </div>
                     </div>
-                    
                     <form asp-action="SubmitTest" method="post">
                         <input type="hidden" name="candidateId" value="@ViewBag.CandidateId" />
-                        
                         @for (int i = 0; i < Model.Count; i++)
                         {
                             var question = Model[i];
@@ -41,7 +35,6 @@
                                         <span class="badge badge-primary me-3 mt-1">문제 @(i + 1)</span>
                                         <h6 class="question-text mb-0 flex-grow-1">@question.Text</h6>
                                     </div>
-                                    
                                     @if (question.Type == FitDevRecruit.Models.QuestionType.MultipleChoice || 
                                          question.Type == FitDevRecruit.Models.QuestionType.Personality)
                                     {
@@ -69,9 +62,8 @@
                                 </div>
                             </div>
                         }
-                        
-                        <div class="d-grid gap-2 mt-5">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="recruit-btn-gradient">
                                 <i class="fas fa-paper-plane me-2"></i>
                                 답안 제출하기
                             </button>
@@ -86,6 +78,8 @@
 <style>
 .question-card {
     border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     transition: all 0.3s ease;
 }
 
@@ -125,5 +119,6 @@
     color: var(--white);
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 </style> 
