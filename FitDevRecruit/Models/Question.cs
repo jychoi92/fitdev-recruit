@@ -39,5 +39,10 @@ namespace FitDevRecruit.Models
         public string? Answer { get; set; } // 주관식 정답 (객관식/인성은 null)
         public int? PersonalityScore { get; set; } // 인성 문제 점수(1~5 등, 기타는 null)
         public TeamType Team { get; set; } = TeamType.Backend;
+        
+        // 자동 채점을 위한 간단한 필드들
+        public string? ModelAnswer { get; set; } // 모범 답안
+        public int MaxScore { get; set; } = 5; // 최대 점수 (기본값 5점)
+        public string? ScoringCriteria { get; set; } // 채점 기준 설명
     }
 } 

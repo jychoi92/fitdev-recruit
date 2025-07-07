@@ -90,6 +90,8 @@ namespace FitDevRecruit.Controllers
             var questions = _questionService.GetAllQuestions();
             int technical = 0, personality = 0, problemSolving = 0, coding = 0, design = 0, leadership = 0;
 
+            // 카테고리별 최대점수 계산
+            int technicalMax = 0, personalityMax = 0, problemSolvingMax = 0, codingMax = 0, designMax = 0, leadershipMax = 0;
             foreach (var answer in answers)
             {
                 var question = questions.FirstOrDefault(q => q.Id == answer.Key);
@@ -101,30 +103,39 @@ namespace FitDevRecruit.Controllers
                     {
                         case QuestionCategory.Technical:
                             technical += score;
+                            technicalMax += 5;
                             break;
                         case QuestionCategory.Coding:
                             coding += score;
+                            codingMax += 5;
                             break;
                         case QuestionCategory.Design:
                             design += score;
+                            designMax += 5;
                             break;
                         case QuestionCategory.Personality:
                             personality += score;
+                            personalityMax += 5;
                             break;
                         case QuestionCategory.Leadership:
                             leadership += score;
+                            leadershipMax += 5;
                             break;
                         case QuestionCategory.ProblemSolving:
                             problemSolving += score;
+                            problemSolvingMax += 5;
                             break;
                     }
                 }
             }
 
             // 종합 점수 계산
-            candidate.TechnicalScore = technical + coding + design;
-            candidate.PersonalityScore = personality + leadership;
+            candidate.TechnicalScore = technical;
+            candidate.PersonalityScore = personality;
             candidate.ProblemSolvingScore = problemSolving;
+            candidate.TechnicalMaxScore = technicalMax;
+            candidate.PersonalityMaxScore = personalityMax;
+            candidate.ProblemSolvingMaxScore = problemSolvingMax;
 
             var report = _reportService.GenerateReport(candidate);
             return View("Result", report);
@@ -142,10 +153,8 @@ namespace FitDevRecruit.Controllers
                     return 0;
                 
                 case QuestionType.Subjective:
-                    // 주관식은 간단히 정답 문자열 비교 (실제론 더 정교한 평가 필요)
-                    if (!string.IsNullOrEmpty(question.Answer) && answer.Trim().ToLower() == question.Answer.Trim().ToLower())
-                        return 5; // 주관식 정답 시 5점
-                    return 2; // 부분 점수
+                    // QuestionService의 AutoScoreSubjectiveQuestion을 사용하여 점수 계산
+                    return _questionService.AutoScoreSubjectiveQuestion(question.Id, answer);
                 
                 case QuestionType.Personality:
                     if (int.TryParse(answer, out int pScore) && pScore >= 1 && pScore <= 5)

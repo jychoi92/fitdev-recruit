@@ -11,5 +11,8 @@ namespace FitDevRecruit.Models
         public int PersonalityScore { get; set; }
         public int ProblemSolvingScore { get; set; }
         public string Summary { get; set; } = string.Empty; // 종합 평가 요약
+        public string CandidateEmail { get; set; } = string.Empty;
+        public string CandidateLevel { get; set; } = string.Empty;
+        public string CandidateTeam { get; set; } = string.Empty;
     }
 } 
